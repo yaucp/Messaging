@@ -45,7 +45,7 @@ def log(addr, msg):
 
 s = socket.socket()
 host = socket.gethostname()
-port = 12345
+port = 12346
 print(f"IP: {str(socket.gethostbyname(host))}")
 
 s.bind((host, port))
