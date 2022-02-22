@@ -23,22 +23,23 @@ def handle(client, name, groups_lock, clients_lock):
             cmd = data_loaded['cmd']
             if cmd[0] == 'SENDMSG':
                 receiver = cmd[1]
+                timestamp = cmd[2]
                 clients_lock.acquire()
                 groups_lock.acquire()
                 if receiver in groups and name in groups[receiver]['members']:
+                    data_loaded['cmd'].insert(2, name)
                     for member in groups[receiver]['members']:
                         if member == name:
                             continue
                         try:
                             data = json.dumps(
-                                {'cmd': ['NEWGPMSG', receiver, name, cmd[2]], 'args': data_loaded['args']})
+                                {'cmd': ['NEWGPMSG', receiver, name, timestamp], 'args': data_loaded['args']})
                             clients[member].send(data.encode())
                         except:
                             log(name, f"{receiver} unable to receive message. Cached.")
                             data = json.dumps({'cmd': ['OFFLINEGPMSG', receiver, member, clients_lastonline[member]],
                                                'args': data_loaded['args']})
                             client.send(data.encode())
-                            data_loaded['cmd'].insert(2, name)
                             gp_cache.setdefault(member, []).append(data_loaded)
                 elif receiver not in clients and receiver not in clients_lastonline:
                     log(name, f"Tried to send message to {receiver} but it doesn't exist.")

@@ -81,7 +81,7 @@ def receive():
     while True:
         try:
             data = client.recv(1024).decode()
-            print(data)
+            # print(data)
             data_loaded = json.loads(data)
             cmd = data_loaded['cmd']
             if cmd[0] == 'NEWUSER':
@@ -111,7 +111,7 @@ def receive():
                     sender = cached_message[2]
                     timestamp = cached_message[3]
                     print(
-                        f"|{cached_message[0]}th message| |{gp_name}| {str(sender)} [{timestamp}]: {cached_message[3]}")
+                        f"|{cached_message[0]}th message| |{gp_name}| {str(sender)} [{timestamp}]: {cached_message[4]}")
             elif cmd[0] == 'NEWGPMSG':
                 gp_name = cmd[1]
                 sender = cmd[2]
