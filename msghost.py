@@ -2,6 +2,7 @@ import socket
 import threading
 import json
 from datetime import datetime
+from time import sleep
 
 
 def broadcast(msg):
@@ -15,7 +16,7 @@ def handle(client, name, groups_lock, clients_lock):
     global groups
     while True:
         try:
-            data = client.recv(2048)
+            data = client.recv(1024)
             clients_lastonline[name] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             data_loaded = json.loads(data.decode())
             log(name, f"Recevied following data: {data_loaded}")
@@ -175,7 +176,7 @@ def setup(socket):
         cmd = json.dumps({'cmd': ['NICK'], 'args': ''})
         client.send(cmd.encode())
 
-        data = client.recv(2048).decode()
+        data = client.recv(1024).decode()
         name = json.loads(data)
         if name['cmd'][0] == 'NAME':
             clients_lock.acquire()
@@ -211,6 +212,7 @@ def setup(socket):
                     i += 1
                 data = json.dumps({'cmd': ['CACHEDGPMSG'], 'args': cache_to_sent})
                 log(name['args'], f"Sending following cached group data: {data}")
+                sleep(0.05)
                 client.send(data.encode())
                 gp_cache[name['args']] = []
 

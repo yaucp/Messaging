@@ -64,7 +64,7 @@ def write():
 
 
 def receive():
-    data = client.recv(2048).decode()
+    data = client.recv(1024).decode()
     init_cmd = json.loads(data)
     if init_cmd['cmd'][0] == 'NICK':
         cmd = json.dumps({'cmd': ['NAME'], 'args': username})
@@ -80,7 +80,7 @@ def receive():
         exit
     while True:
         try:
-            data = client.recv(2048).decode()
+            data = client.recv(1024).decode()
             print(data)
             data_loaded = json.loads(data)
             cmd = data_loaded['cmd']
