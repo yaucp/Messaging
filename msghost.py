@@ -229,7 +229,7 @@ s6 = socket.socket(family=socket.AF_INET6, type=socket.SOCK_STREAM)
 
 host4 = socket.gethostname()
 host6 = socket.gethostname()
-print(s6.gethostname())
+print(socket.gethostname())
 port4 = 59363
 port6 = 59364
 print(f"IPv4: {str(socket.gethostbyname(host4))}:{port4}")
