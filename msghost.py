@@ -229,14 +229,15 @@ s6 = socket.socket(family=socket.AF_INET6)
 
 host4 = socket.gethostname()
 host6 = socket.gethostname()
-port = 12345
-print(f"IPv4: {str(socket.gethostbyname(host4))}:{port}")
-print(f"IPv6: {str(socket.getaddrinfo(host6, port + 1, family=socket.AF_INET6)[0][4])}")
+port4 = 12345
+port6 = 12346
+print(f"IPv4: {str(socket.gethostbyname(host4))}:{port4}")
+print(f"IPv6: {str(socket.getaddrinfo(host6, port6, family=socket.AF_INET6)[0][4])}")
 
-s4.bind((host4, port))
+s4.bind((host4, port4))
 s4.listen(5)
 
-s6.bind((host6, port + 1))
+s6.bind((host6, port6))
 s6.listen(5)
 
 groups = {}
