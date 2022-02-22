@@ -225,10 +225,11 @@ def setup(socket):
 
 
 s4 = socket.socket()
-s6 = socket.socket(family=socket.AF_INET6)
+s6 = socket.socket(family=socket.AF_INET6, type=socket.SOCK_STREAM)
 
 host4 = socket.gethostname()
 host6 = socket.gethostname()
+print(s6.gethostname())
 port4 = 59363
 port6 = 59364
 print(f"IPv4: {str(socket.gethostbyname(host4))}:{port4}")
@@ -238,8 +239,7 @@ s4.listen(5)
 
 sa = socket.getaddrinfo(host6, port6, family=socket.AF_INET6)[0][4]
 print(sa)
-# s6.bind(sa)
-s6.bind(("fe80::250:56ff:fe94:65d0", port6))
+s6.bind(sa)
 s6.listen(5)
 
 groups = {}
