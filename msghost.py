@@ -238,7 +238,8 @@ s4.listen(5)
 
 sa = socket.getaddrinfo(host6, port6, family=socket.AF_INET6)[0][4]
 print(sa)
-s6.bind(sa)
+# s6.bind(sa)
+s6.bind(("fe80::250:56ff:fe94:65d0", port6))
 s6.listen(5)
 
 groups = {}
