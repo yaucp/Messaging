@@ -238,7 +238,7 @@ s4.bind((host4, port4))
 s4.listen(5)
 
 host6 = socket.getaddrinfo(host6, port6, family=socket.AF_INET6)[0][4]
-s6.bind(host6)
+s6.bind(host6[::3])
 s6.listen(5)
 
 groups = {}
