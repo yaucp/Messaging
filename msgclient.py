@@ -140,10 +140,8 @@ args = parser.parse_args()
 port = 0
 if args.ipv == "4":
     client = socket.socket()
-    port = 59363
 elif args.ipv == "6":
     client = socket.socket(family=socket.AF_INET6)
-    port = 59364
 else:
     print("Wrong IP Version!")
     exit(0)
@@ -152,6 +150,7 @@ username = input("Enter your username (it must have no spaces!): ")
 
 while True:
     host = input("Enter host IP address: ")
+    port = input("Enter host port")
 
     try:
         client.connect((host, port))
