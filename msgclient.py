@@ -150,7 +150,7 @@ username = input("Enter your username (it must have no spaces!): ")
 
 while True:
     host = input("Enter host IP address: ")
-    port = input("Enter host port")
+    port = int(input("Enter host port: "))
 
     try:
         client.connect((host, port))
