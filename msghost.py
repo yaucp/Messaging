@@ -236,9 +236,9 @@ print(f"IPv6: {str(socket.getaddrinfo(host6, port6, family=socket.AF_INET6)[0][4
 s4.bind((host4, port4))
 s4.listen(5)
 
-host6 = socket.getaddrinfo(host6, port6, family=socket.AF_INET6)[0][4]
-print(host6[:3])
-s6.bind(host6[:3])
+sa = socket.getaddrinfo(host6, port6, family=socket.AF_INET6)[0][4]
+print(sa)
+s6.bind(sa)
 s6.listen(5)
 
 groups = {}
