@@ -229,8 +229,8 @@ s6 = socket.socket(family=socket.AF_INET6)
 
 host4 = socket.gethostname()
 host6 = socket.gethostname()
-port4 = 12345
-port6 = 12346
+port4 = 59363
+port6 = 59364
 print(f"IPv4: {str(socket.gethostbyname(host4))}:{port4}")
 print(f"IPv6: {str(socket.getaddrinfo(host6, port6, family=socket.AF_INET6)[0][4])}")
 
